@@ -1,5 +1,5 @@
 import React from 'react';
-import TeamHeaderCol from '../../TeamHeaderCol';
+import TeamHeaderCol from './TeamHeaderCol';
 
 function TeamHeaderRow({ sortCol, sortDir, onHandleSort }) {
   return (

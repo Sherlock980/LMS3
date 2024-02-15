@@ -1,5 +1,5 @@
 import React from 'react';
-import DeleteButton from "../DeleteButton";
+import DeleteButton from "./DeleteButton";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
 import { FaEdit } from "react-icons/fa";

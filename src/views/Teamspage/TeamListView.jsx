@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import TeamsTable from './TeamListView/TeamsTable';
+import TeamsTable from './TeamsTable';
 import AlertList from '../../comp/Layout/AlertList';
 import Button from 'react-bootstrap/Button';
 

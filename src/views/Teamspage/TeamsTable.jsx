@@ -1,5 +1,5 @@
 import React from 'react';
-import TeamHeaderRow from './TeamsTable/TeamHeaderRow/TeamHeaderCol/TeamHeaderRow';
+import TeamHeaderRow from './TeamHeaderRow';
 import TeamRow from './TeamRow';
 
 function TeamsTable({ teams, onHandleDelete, sortCol, sortDir, onHandleSort }) {
