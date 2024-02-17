@@ -12,15 +12,12 @@ function Homepage() {
           aria-labelledby="home-tab"
         >
           <section className="home-top">
-            <h1>Blizzard Snowboarding League</h1>
+            <h1>Welcome</h1>
             <p>
-              Welcome to the Blizzard Snowboarding League, the ultimate
-              destination for snowboarding enthusiasts and adrenaline seekers!
-              Our league represents the pinnacle of snowboarding excellence,
-              offering an exhilarating mix of competitive and freestyle events
+              BSL represents the pinnacle of snowboarding excellence,
+              offering a mix of competitive and freestyle events
               set against some of the most breathtaking alpine landscapes. At
-              Blizzard, we celebrate the spirit of adventure and the thrill of
-              conquering snowy terrains. </p>{' '}
+              Blizzard, we celebrate the thrill of conquering snowy terrains. </p>{' '}
               <p>
               Whether you're a seasoned pro aiming
               for the top spot or a newcomer eager to carve your first trail,
@@ -72,3 +69,4 @@ function Homepage() {
 }
 
 export default Homepage;
+

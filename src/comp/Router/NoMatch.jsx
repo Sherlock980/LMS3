@@ -7,7 +7,7 @@ const NoMatch = () => {
       <section className='NoMatch'>
         <h1>404 - Not Found!</h1>
         <p>Sorry, the page you are looking for does not exist.</p>
-        <p>You can always go back to the <Link to="/">homepage</Link>.</p>
+        <p>You can always go back to the <Link to="/" className='social-link'>Homepage</Link>.</p>
       </section>
     </div>
   );

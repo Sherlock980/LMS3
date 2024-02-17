@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import TeamsTable from './TeamsTable';
 import AlertList from '../../comp/Layout/AlertList';
-import Button from 'react-bootstrap/Button';
+
 
 function TeamListView({ viewModel, model }) {
   const [teams, setTeams] = useState([]);
@@ -91,15 +91,8 @@ function TeamListView({ viewModel, model }) {
         viewModel={viewModel}
         onHandleDelete={handleDelete}
         onHandleSort={handleSort}
+        handleReset={handleReset}
       />
-
-      <Button
-        variant="primary"
-        onClick={handleReset}
-        className="mt-3"
-      >
-        Reset Table
-      </Button>
     </div>
   );
 }

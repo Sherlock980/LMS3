@@ -26,7 +26,7 @@ function TeamRow({ team, onHandleDelete }) {
         <td>{team.coachPhone}</td>
         <td>{team.numberOfPlayers}</td>
         <td>
-          <Link to={`/edit-team/${team.id}`}><FaEdit /></Link>
+          <Link to={`/edit-team/${team.id}`}><FaEdit className='link' /></Link>
           <DeleteButton teamId={team.id} teamName={team.name} onDelete={() => onHandleDelete(team.id)} />
         </td>
       </tr>
@@ -35,3 +35,4 @@ function TeamRow({ team, onHandleDelete }) {
 }
 
 export default TeamRow;
+

@@ -1,10 +1,10 @@
 import React from 'react';
 import TeamHeaderRow from './TeamHeaderRow';
 import TeamRow from './TeamRow';
+import Button from 'react-bootstrap/Button';
 
-function TeamsTable({ teams, onHandleDelete, sortCol, sortDir, onHandleSort }) {
+function TeamsTable({ teams, onHandleDelete, sortCol, sortDir, onHandleSort, handleReset }) {
   return (
-    
     <div className="team-cell-table mb-4">
       <h1>BSL Teams</h1>
       <table className="table table-hover table-striped">
@@ -21,10 +21,16 @@ function TeamsTable({ teams, onHandleDelete, sortCol, sortDir, onHandleSort }) {
           ))}
         </tbody>
       </table>
+
+      <Button
+        variant="primary"
+        onClick={handleReset}
+        className="clear-btn"
+      >
+        Clear
+      </Button>
     </div>
   );
 }
 
-
 export default TeamsTable;
-

@@ -98,10 +98,10 @@ let appViewModel = {
           notes: "we need to win",
           motto: "Our team rocks!",
           coach_id: 2,
-          coachName: "Tait Draper",
+          coachName: "Travis Rice",
           coachPhone: "234-567-8901",
           numberOfPlayers: "13",
-          coachEmail: "tait.draper@uvu.edu",
+          coachEmail: "travis.rice@uvu.edu",
         },
         {
           id: 3,

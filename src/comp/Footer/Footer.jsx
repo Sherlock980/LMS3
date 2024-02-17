@@ -12,17 +12,17 @@ function Footer() {
                     <h5 className="text-uppercase">Follow us on Social Media</h5>
                     <ul className="list-unstyled">
                     <li>
-                        <a href="#!">
+                        <a href="#!" className="link">
                             <FontAwesomeIcon icon={faFacebookF} /> Facebook
                         </a>
                     </li>
                     <li>
-                        <a href="#!">
+                        <a href="#!" className="link">
                             <FontAwesomeIcon icon={faTwitter} /> Twitter
                         </a>
                     </li>
                     <li>
-                        <a href="#!">
+                        <a href="#!" className="link">
                             <FontAwesomeIcon icon={faInstagram} /> Instagram
                         </a>
                     </li>

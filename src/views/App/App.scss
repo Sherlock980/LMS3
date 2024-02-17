@@ -1,5 +1,4 @@
 
-
 @import './custom.scss';
 
 @import '~bootstrap/scss/bootstrap';
@@ -75,7 +74,14 @@ p,
     margin-right: 10px;
 }
 
-.navbar .nav-link:hover {
+.clear-btn {
+    background-color: #08E8DE;
+    color: white;
+    border-radius: 5px;
+    border: none;
+}
+  
+.navbar .nav-link:hover, .clear-btn:hover {
     background-color: #FF5A35;
     color: #fff;
 }
@@ -114,8 +120,14 @@ p,
     z-index: 1050;
 }
 
-
-
+.link {
+    color: #04b5bb; 
+}
+  
+.link:hover {
+    color: #FF5A35; 
+}
+  
 
 @keyframes colorChange {
     0% { color: #08E8DE; }
