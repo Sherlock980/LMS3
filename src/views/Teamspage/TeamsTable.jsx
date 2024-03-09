@@ -2,24 +2,32 @@ import React from 'react';
 import TeamHeaderRow from './TeamHeaderRow';
 import TeamRow from './TeamRow';
 import Button from 'react-bootstrap/Button';
+import { Link } from "react-router-dom";
 
-function TeamsTable({ teams, onHandleDelete, sortCol, sortDir, onHandleSort, handleReset }) {
+function TeamsTable({ teams, onHandleDelete, sortCol, sortDir, onHandleSort, handleReset, columns }) {
   return (
     <div className="team-cell-table mb-4">
       <h1>BSL Teams</h1>
-      <table className="table table-hover table-striped">
+      <table className={columns.tableClasses || "table table-hover table-striped"}>
         <thead>
-          <TeamHeaderRow
-            onHandleSort={onHandleSort}
-            sortCol={sortCol}
-            sortDir={sortDir}
+          <TeamHeaderRow 
+            columns={columns} 
+            sortCol={sortCol} 
+            sortDir={sortDir} 
+            onHandleSort={onHandleSort} 
           />
         </thead>
         <tbody>
-          {teams.map(team => (
-            <TeamRow key={team.id} team={team} onHandleDelete={() => onHandleDelete(team.id)} />
+          {teams.map((team, index) => (
+            <TeamRow
+              key={team.id || `temp-key-${index}`}
+              team={team}
+              columns={columns}
+              onHandleDelete={onHandleDelete}
+            />
           ))}
         </tbody>
+
       </table>
 
       <Button
@@ -29,6 +37,12 @@ function TeamsTable({ teams, onHandleDelete, sortCol, sortDir, onHandleSort, han
       >
         Clear
       </Button>
+
+      <Link to="/add-team">
+        <Button className="m-2" variant="primary">New</Button>
+      </Link>
+
+
     </div>
   );
 }

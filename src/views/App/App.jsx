@@ -1,26 +1,39 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import "./App.css";
-import Header from "../../comp/Header/Header";
+
 import Homepage from "../Homepage/Homepage";
-import Teamspage from "../Teamspage/Teamspage";
-import Footer from "../../comp/Footer/Footer";
+import TeamsPage from "../Teamspage/Teamspage";
+
 import NoMatch from "../../comp/Router/NoMatch";
 
-const App = () => {
+
+import appViewModel from '../../services/appViewModel.meta';
+
+import { TeamsContext } from '../../services/TeamsContext';
+import EditTeam from '../Teamspage/EditTeam'; 
+import "./App.css";
+import Layout from '../../comp/Layout/Layout';
+
+function App() {
+  const api = appViewModel.getApi("teams");
+  const viewModel = appViewModel.entities["teams"];
   return (
-    <>
-      <Header />
-      <div>
+
+      <TeamsContext.Provider value={{ api, viewModel }}>
         <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/teams" element={<Teamspage />} />
-          <Route path="*" element={<NoMatch />} />
+          <Route path="/" element={<Layout title="Blizzard Snowboarding League" />}>
+            <Route index element={<Homepage />} />
+            <Route path="teams" element={<TeamsPage />} />
+            <Route path="add-team" element={<EditTeam isCreate={true} api={TeamsContext.api} />} />
+            <Route path="edit-team/:id" element={<EditTeam isCreate={false} api={TeamsContext.api} />} />
+            <Route path="*" element={<NoMatch />} />
+          </Route>
         </Routes>
-      </div>
-      <Footer />
-    </>
+      </TeamsContext.Provider>
+
   );
-};
+}
 
 export default App;
+

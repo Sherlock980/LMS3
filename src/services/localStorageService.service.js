@@ -3,11 +3,22 @@ export default class LocalStorageService {
    constructor(model, key) {
        this.origModel = model;
        this.key = key;
+       this.update = this.update.bind(this);
+       this.create = this.create.bind(this);
+       this.delete = this.delete.bind(this);
 
        if (!this.retrieve()) {
-           this.model = this.cloneObject(model);   // get copy of data
+           this.model = this.cloneObject(model);
        }
    }
+
+  getLookup(lookupType) {
+    if (this.model.lookups && this.model.lookups[lookupType]) {
+      return Promise.resolve(this.model.lookups[lookupType]);
+    } else {
+      return Promise.reject(new Error(`Lookup type '${lookupType}' not found`));
+    }
+  }
 
    get sortCol() {
        return this.model.list.options.sortCol;
@@ -35,6 +46,7 @@ export default class LocalStorageService {
    }
 
    async list() {
+    console.log("Listing with sort and filter in LocalStorageService:", { sortCol: this.sortCol, sortDir: this.sortDir, filterStr: this.filterStr });
        this.sort(this.sortCol, this.sortDir);
        let filterObj = {};
 
@@ -47,13 +59,20 @@ export default class LocalStorageService {
    }
 
    async create(obj) {
-       this.model.data.push(obj);
-       this.store();
-   }
+    if (!this.model.data) {
+        console.error('Model data array is undefined, initializing as empty array.');
+        this.model.data = [];
+    }
+    this.model.data.push(obj);
+    this.store();
+    }
 
-   async read(getId) {
-       return this.model.data.find(item => item.id === getId) || null;
-   }
+
+    async read(getId) {
+        const item = this.model.data.find(item => String(item.id) === String(getId));
+        return item || null;
+    }
+    
 
    async update(obj) {
        let index = this.getItemIndex(obj.id);
@@ -97,7 +116,9 @@ export default class LocalStorageService {
 
 
    sort(col, direction) {
+    console.log(`Sorting by ${col} in direction ${direction}`);
        let sortedData = this.cloneObject(this.model.data);
+
        sortedData.sort((a, b) => {
            if (a[col] < b[col]) return direction === 'asc' ? -1 : 1;
            if (a[col] > b[col]) return direction === 'asc' ? 1 : -1;
@@ -109,9 +130,10 @@ export default class LocalStorageService {
    }
 
    filter(filterObj) {
+    console.log(`Filtering with:`, filterObj);
       return this.model.data.filter(item => {
           return Object.keys(filterObj).every(key => {
-              return item[key] === filterObj[key];
+              return item[key] == filterObj[key];
           });
       });
   }

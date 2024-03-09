@@ -92,7 +92,7 @@ let appViewModel = {
         },
         {
           id: 2,
-          league_id: 1,
+          league_id: 2,
           name: "Polar Pups",
           logo_path: PolarPups,
           notes: "we need to win",
@@ -105,12 +105,12 @@ let appViewModel = {
         },
         {
           id: 3,
-          league_id: 1,
+          league_id: 3,
           name: "Flying Penguins",
           logo_path: FlyingPenguins,
           notes: "we need to win",
           motto: "We will bury you!",
-          coachId: 3,
+          coach_id: 3,
           coachName: "Shaun White",
           coachPhone: "345-678-9012",
           numberOfPlayers: "12",
@@ -120,12 +120,16 @@ let appViewModel = {
       lookups: {
         coaches: [
           {
-            label: "Josh Clark",
-            value: 1,
+            label: "Shaun White",
+            value: 3,
           },
           {
-            label: "Shaun White",
+            label: "Travis Rice",
             value: 2,
+          },
+          {
+            label: "Josh Clark",
+            value: 1,
           },
         ],
       }
@@ -263,11 +267,11 @@ let appViewModel = {
         teams: [
           {
             label: "Sailing Seals",
-            value: 3,
+            value: 1,
           },
           {
             label: "Flying Penguins",
-            value: 1,
+            value: 3,
           },
           {
             label: "Polar Pups",
@@ -279,11 +283,9 @@ let appViewModel = {
   },
 
   getApi(entity) {
-
     let model = this.entities[entity];
-    console.log(entity)
+
     if (this.app.isMock) {
-      console.log("in here")
       return new LocalStorageService(model, entity);
     } else {
       //LMS6 Only
