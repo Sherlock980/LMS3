@@ -5,7 +5,7 @@ import { TeamsContext } from '../../services/TeamsContext';
 import { Container, Form, Button } from 'react-bootstrap';
 
 function EditTeam({ isCreate }) {
-    const { api } = useContext(TeamsContext);
+  const { api, viewModel } = useContext(TeamsContext);
     const navigate = useNavigate();
     const { id } = useParams();
     const { register, handleSubmit, setValue, formState: { errors } } = useForm();

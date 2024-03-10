@@ -1,7 +1,7 @@
 
 import TeamsAside from './TeamsAside';
 import TeamsBottom from './TeamsBottom';
-import TeamListView from './TeamListView';
+import ListView from './ListView';
 import React, { useContext } from 'react';
 import { TeamsContext } from '../../services/TeamsContext';
 
@@ -14,7 +14,7 @@ function TeamsPage() {
         <div className="row">
           <TeamsAside />
           <div className="col-md-9 order-md-2">
-          <TeamListView viewModel={viewModel} api={api} />
+          <ListView viewModel={viewModel} api={api} />
           <TeamsBottom />
           </div>
           </div>

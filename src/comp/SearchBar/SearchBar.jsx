@@ -1,7 +1,6 @@
 
 import React from 'react';
 
-
 function SearchBar({ onSearchHandler, filterText, setFilterText }) {
     const handleChange = (e) => {
       const { value } = e.target;
@@ -20,7 +19,7 @@ function SearchBar({ onSearchHandler, filterText, setFilterText }) {
           type="text" 
           value={filterText} 
           onChange={handleChange} 
-          placeholder="Search for teams..."
+          placeholder="Search..."
         />
         <button onClick={handleClear}>Clear</button>
       </div>

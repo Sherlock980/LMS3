@@ -1,11 +1,11 @@
 import React from 'react';
-import TeamHeaderCol from './TeamHeaderCol';
+import TableHeaderCol from './TableHeaderCol';
 
-function TeamHeaderRow({ columns, sortCol, sortDir, onHandleSort }) {
+function TableHeaderRow({ columns, sortCol, sortDir, onHandleSort }) {
   return (
     <tr>
       {columns.map(column => (
-        <TeamHeaderCol
+        <TableHeaderCol
           key={column.name}
           label={column.label}
           colName={column.name}
@@ -19,4 +19,4 @@ function TeamHeaderRow({ columns, sortCol, sortDir, onHandleSort }) {
   );
 }
 
-export default TeamHeaderRow;
+export default TableHeaderRow;

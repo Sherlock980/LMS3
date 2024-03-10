@@ -1,16 +1,16 @@
 import React from 'react';
-import TeamHeaderRow from './TeamHeaderRow';
-import TeamRow from './TeamRow';
+import TableHeaderRow from './TableHeaderRow';
+import DataRow from './DataRow';
 import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
 
-function TeamsTable({ teams, onHandleDelete, sortCol, sortDir, onHandleSort, handleReset, columns }) {
+function DataTable({ teams, onHandleDelete, sortCol, sortDir, onHandleSort, handleReset, columns }) {
   return (
     <div className="team-cell-table mb-4">
       <h1>BSL Teams</h1>
       <table className={columns.tableClasses || "table table-hover table-striped"}>
         <thead>
-          <TeamHeaderRow 
+          <TableHeaderRow 
             columns={columns} 
             sortCol={sortCol} 
             sortDir={sortDir} 
@@ -19,7 +19,7 @@ function TeamsTable({ teams, onHandleDelete, sortCol, sortDir, onHandleSort, han
         </thead>
         <tbody>
           {teams.map((team, index) => (
-            <TeamRow
+            <DataRow
               key={team.id || `temp-key-${index}`}
               team={team}
               columns={columns}
@@ -47,4 +47,4 @@ function TeamsTable({ teams, onHandleDelete, sortCol, sortDir, onHandleSort, han
   );
 }
 
-export default TeamsTable;
+export default DataTable;

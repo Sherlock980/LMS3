@@ -6,7 +6,12 @@ import { FaEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { Button } from 'react-bootstrap';
 
-function TeamRow({ team, columns, onHandleDelete }) {
+function DataRow({ team, columns, onHandleDelete }) {
+  // Check if team is undefined and return null or a placeholder
+  if (!team) {
+    return null; // or you can return a placeholder row if appropriate
+  }
+
   const logoSrc = team.logo_path || team.logo_url;
 
   const popover = (
@@ -50,4 +55,6 @@ function TeamRow({ team, columns, onHandleDelete }) {
   );
 }
 
-export default TeamRow;
+
+export default DataRow;
+

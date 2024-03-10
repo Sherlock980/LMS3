@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaSortUp, FaSortDown, FaSort } from 'react-icons/fa';
 
-function TeamHeaderCol({ label, thClasses = "", colName, sortCol, sortDir, onHandleSort }) {
+function TableHeaderCol({ label, thClasses = "", colName, sortCol, sortDir, onHandleSort }) {
   let SortIcon = FaSort;
   if (colName === sortCol) {
     SortIcon = sortDir === 'asc' ? FaSortUp : FaSortDown;
@@ -19,7 +19,7 @@ function TeamHeaderCol({ label, thClasses = "", colName, sortCol, sortDir, onHan
   );
 }
 
-export default TeamHeaderCol;
+export default TableHeaderCol;
 
 
 
