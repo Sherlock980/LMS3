@@ -4,16 +4,17 @@ import AlertList from '../../comp/Layout/AlertList';
 import { TeamsContext } from '../../services/TeamsContext';
 import SearchBar from '../../comp/SearchBar/SearchBar'
 
-function TeamListView() {
-  const { api, viewModel } = useContext(TeamsContext);
-  const [teams, setTeams] = useState([]);
-  const [alertList, setAlertList] = useState([]);
 
-  const [sortCol, setSortCol] = useState(viewModel.list.options.sortCol);
-  const [sortDir, setSortDir] = useState(viewModel.list.options.sortDir);
-  
+function TeamListView({ viewModel, api }) {
+
+  const [data, setData] = useState([]);
+
+  const [sortCol, setSortCol] = useState(api.sortCol);
+  const [sortDir, setSortDir] = useState(api.sortDir);
   const [filterStr, setFilterStr] = useState('');
   const [filterText, setFilterText] = useState('');
+  const [alertList, setAlertList] = useState([]);
+  const [isReset, setIsReset] = useState(false);
 
   const addAlert = (title, type) => {
     setAlertList(current => [...current, { id: Date.now(), title, type }]);
@@ -26,88 +27,82 @@ function TeamListView() {
   const handleDelete = async (teamId) => {
     try {
       await api.delete(teamId);
-      setTeams(teams.filter(team => team.id !== teamId));
+      setData(data.filter(team => team.id !== teamId));
       addAlert('Team successfully deleted.', 'success');
     } catch (error) {
       addAlert('Failed to delete team.', 'error');
     }
   };
 
-  const handleReset = async () => {
-    try {
-      await api.reset();
-      const updatedTeams = await api.list();
-      setTeams(updatedTeams);
-      addAlert('Teams data has been reset.', 'success');
-    } catch (error) {
-      console.error('Failed to reset the teams data:', error);
-      addAlert('Failed to reset the teams data.', 'error');
-    }
+  const handleSort = (colName) => {
+    setSortCol(colName);
+    setSortDir(sortCol === colName && sortDir === 'asc' ? 'desc' : 'asc');
   };
 
-  const handleSort = async (colName) => {
-    console.log(`Current sorting parameters:`, { sortCol, sortDir });
-    const newSortDir = sortCol === colName && sortDir === 'asc' ? 'desc' : 'asc';
-    
-    setSortCol(colName);
-    setSortDir(newSortDir);
-
-    console.log(`Updated sorting parameters to:`, { colName, newSortDir });
-
-    const sortedTeams = await api.list({ sortCol: colName, sortDir: newSortDir });
-    console.log("Sorted Teams:", sortedTeams);
-    setTeams(sortedTeams);
-};
-
+  const handleReset = async () => {
+    // Ensure this resets to viewModel defaults and re-fetches the initial data set from the api
+    try {
+      await api.reset(); // Reset the storage to initial state
+      const updatedTeams = await api.list();
+      setData(updatedTeams);
+      setIsReset(false); // Ensure state is properly reset
+      addAlert(viewModel.resetSuccessMessage, 'success');
+    } catch (error) {
+      console.error(viewModel.resetErrorMessage, error);
+      addAlert(viewModel.resetErrorMessage, 'error');
+    }
+  };
+  
 
   const onSearchHandler = (searchTerm) => {
-    console.log("Search term updated:", searchTerm);
-    setFilterStr(searchTerm);
-  };
-
-
-useEffect(() => {
+    console.log('Search term:', searchTerm);
+    setFilterText(searchTerm);
   
-  api.sortCol=sortCol;
-  api.sortDir=sortDir;
-  api.filterStr=filterStr;
-  const fetchTeams = async () => {
-    try {
-      const teamsData = await api.list({ sortCol, sortDir, filterStr });
-      setTeams(teamsData);
-    } catch (error) {
-      addAlert('Failed to fetch teams.', 'error');
+    if (searchTerm.length > 2 || searchTerm === '') {
+      setFilterStr(searchTerm);
+      console.log('Filter string set:', searchTerm);
     }
   };
-
-  if (filterStr.length > 2 || filterStr === '') {
-    fetchTeams();
-  }
-}, [api, sortCol, sortDir, filterStr]);
-
   
 
+  useEffect(() => {
+    console.log('useEffect triggered', { sortCol, sortDir, filterStr, isReset });
+  
+    api.sortCol = sortCol;
+    api.sortDir = sortDir;
+    api.filterStr = filterStr;
+  
+    api.list().then((teams) => {
+      setData(teams);
+      setIsReset(false); // Ensure this is correctly resetting
+      console.log('Data fetched and set', teams);
+    }).catch(error => {
+      console.error('Error fetching data:', error);
+    });
+  
+  }, [api, sortCol, sortDir, filterStr, isReset, alertList]);
+  
   return (
-    <div>
-      <AlertList alerts={alertList} onDismiss={dismissAlert} />
-      <SearchBar 
-        onSearchHandler={onSearchHandler} 
-        filterText={filterText} 
-        setFilterText={setFilterText}
-      />
-      <TeamsTable
-        teams={teams}
-        sortCol={sortCol}
-        sortDir={sortDir}
-        columns={viewModel.list.columns}
-        onHandleDelete={handleDelete}
-        onHandleSort={handleSort}
-        handleReset={handleReset}
-      />
-    </div>
+    data && (
+      <div>
+        <AlertList alerts={alertList} onDismiss={dismissAlert} />
+        <SearchBar 
+          onSearchHandler={onSearchHandler} 
+          filterText={filterText} 
+          setFilterText={setFilterText}
+        />
+        <TeamsTable
+          teams={data}
+          sortCol={sortCol}
+          sortDir={sortDir}
+          columns={viewModel.list.columns}
+          onHandleSort={handleSort}
+          onHandleDelete={handleDelete}
+          handleReset={handleReset}
+        />
+      </div>
+    )
   );
 }
 
 export default TeamListView;
-
-

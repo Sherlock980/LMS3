@@ -46,17 +46,15 @@ export default class LocalStorageService {
    }
 
    async list() {
-    console.log("Listing with sort and filter in LocalStorageService:", { sortCol: this.sortCol, sortDir: this.sortDir, filterStr: this.filterStr });
-       this.sort(this.sortCol, this.sortDir);
-       let filterObj = {};
+    this.sort(this.sortCol, this.sortDir);
+    if (this.filterStr) {
+        return this.model.data.filter(item => {
+            return item.name.toLowerCase().includes(this.filterStr.toLowerCase());
+        });
+    }
+    return this.model.data;
+}
 
-       if (this.filterStr) {
-           filterObj[this.filterCol] = this.filterStr;
-           return this.filter(filterObj);
-       }
-
-       return this.model.data;
-   }
 
    async create(obj) {
     if (!this.model.data) {
