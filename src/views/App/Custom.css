@@ -11975,4 +11975,8 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important;
   }
+  .blue-alert {
+    background-color: blue !important;
+    color: white !important;
+  }
 }/*# sourceMappingURL=Custom.css.map */

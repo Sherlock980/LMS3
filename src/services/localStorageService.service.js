@@ -55,15 +55,17 @@ export default class LocalStorageService {
     return this.model.data;
 }
 
+    async create(obj) {
+        if (!this.model.data) {
+            console.error('Model data array is undefined, initializing as empty array.');
+            this.model.data = [];
+        }
+        const newId = this.model.data.reduce((acc, cur) => cur.id > acc ? cur.id : acc, 0) + 1;
+        const newObj = { ...obj, id: newId };
+        this.model.data.push(newObj);
+        this.store();
+    }
 
-   async create(obj) {
-    if (!this.model.data) {
-        console.error('Model data array is undefined, initializing as empty array.');
-        this.model.data = [];
-    }
-    this.model.data.push(obj);
-    this.store();
-    }
 
 
     async read(getId) {
@@ -71,7 +73,6 @@ export default class LocalStorageService {
         return item || null;
     }
     
-
    async update(obj) {
        let index = this.getItemIndex(obj.id);
        if (index !== -1) {
@@ -87,7 +88,6 @@ export default class LocalStorageService {
            this.store();
        }
    }
-
 
    reset() {
        this.clear();
@@ -112,9 +112,7 @@ export default class LocalStorageService {
        return false;
    }
 
-
    sort(col, direction) {
-    console.log(`Sorting by ${col} in direction ${direction}`);
        let sortedData = this.cloneObject(this.model.data);
 
        sortedData.sort((a, b) => {
@@ -128,7 +126,6 @@ export default class LocalStorageService {
    }
 
    filter(filterObj) {
-    console.log(`Filtering with:`, filterObj);
       return this.model.data.filter(item => {
           return Object.keys(filterObj).every(key => {
               return item[key] == filterObj[key];
@@ -136,7 +133,6 @@ export default class LocalStorageService {
       });
   }
   
-
    getItemIndex(id) {
        return this.model.data.findIndex(item => item.id === id);
    }

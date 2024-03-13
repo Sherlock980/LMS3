@@ -3,14 +3,19 @@ import React from 'react';
 function TeamsAside() {
   return (
     <aside className="col-md-3 team-cell-aside order-md-1">
-      <h3>Upcoming</h3>
-      <p>
-        Season Kickoff Event: Get ready to hit the slopes! Our season-opening event 
-        is scheduled for December 10th at the majestic WhiteOut Mountain. Join us 
-        for an action-packed day featuring elite competitions, beginner workshops, 
-        and a special guest appearance from renowned snowboarder, Max Winterhawk. 
-        Register early to secure your spot!
-      </p>
+        <h3>Team Dynamics and Point System</h3>
+        <p>
+            A team can consist of amateur and professional riders. 
+            Each team is encouraged to have a diverse roster to 
+            compete across various events, including slalom, 
+            halfpipe, big air, and freestyle.
+        </p>
+        <h3>Upcoming</h3>
+        <div>
+            <p>KICKOFF EVENT</p>
+            <p>DATE: November 10th</p>
+            <p>LOCATION: WhiteOut Mountain</p>
+        </div>
     </aside>
   );
 }

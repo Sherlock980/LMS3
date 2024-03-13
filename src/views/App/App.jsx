@@ -4,20 +4,16 @@ import "./App.css";
 
 import Homepage from "../Homepage/Homepage";
 import TeamsPage from "../Teamspage/Teamspage";
-
 import NoMatch from "../../comp/Router/NoMatch";
-
-
-import appViewModel from '../../services/appViewModel.meta';
 
 import { TeamsContext } from '../../services/TeamsContext';
 import EditTeam from '../Teamspage/EditTeam'; 
 import "./App.css";
 import Layout from '../../comp/Layout/Layout';
+import { useContext } from 'react';
 
 function App() {
-  const api = appViewModel.getApi("teams");
-  const viewModel = appViewModel.entities["teams"];
+  const { api, viewModel } = useContext(TeamsContext);
   return (
     <TeamsContext.Provider value={{ api, viewModel }}>
       <Routes>
@@ -32,7 +28,6 @@ function App() {
     </TeamsContext.Provider>
   );
 }
-
 
 export default App;
 

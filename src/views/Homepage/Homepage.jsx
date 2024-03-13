@@ -18,12 +18,12 @@ function Homepage() {
               offering a mix of competitive and freestyle events
               set against some of the most breathtaking alpine landscapes. At
               Blizzard, we celebrate the thrill of conquering snowy terrains. </p>{' '}
-              <p>
-              Whether you're a seasoned pro aiming
-              for the top spot or a newcomer eager to carve your first trail,
-              our league provides the perfect platform to showcase your
-              skills, push your limits, and connect with a vibrant community
-              of fellow snowboarders. </p>{' '}
+            <p>
+            Whether you're a seasoned pro aiming
+            for the top spot or a newcomer eager to carve your first trail,
+            our league provides the perfect platform to showcase your
+            skills, push your limits, and connect with a vibrant community
+            of fellow snowboarders. </p>{' '}
 
           </section>
 

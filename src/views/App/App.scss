@@ -74,14 +74,15 @@ p,
     margin-right: 10px;
 }
 
-.clear-btn {
-    background-color: #08E8DE;
+.btn {
+    background-color: #06C2C9;
     color: white;
     border-radius: 5px;
     border: none;
 }
   
-.navbar .nav-link:hover, .clear-btn:hover {
+
+.navbar .nav-link:hover, .btn:hover{
     background-color: #FF5A35;
     color: #fff;
 }
@@ -128,40 +129,63 @@ p,
     color: #FF5A35; 
 }
   
-
-@keyframes colorChange {
-    0% { color: #08E8DE; }
-    50% { color: #FF5A35; }
-    100% { color: #08E8DE; }
-  }
+.searchbar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
   
-  .brand-large {
-    font-size: 2.5rem;
-    font-weight: bold;
-    animation: colorChange 5s infinite;
-  }
-  
+.searchbar input[type="text"] {
+    flex-grow: 1;
+    margin-right: 8px;
+    padding: 10px;
+    border: 2px solid #08E8DE;
+    border-radius: 5px;
+}
 
-  .brand-small {
-    font-size: 1rem; 
-  }
-  
-
-  .home-top, .home-bottom, .team-cell-aside, .team-cell-table, .team-cell-bottom, .NoMatch {
+.home-top, .home-bottom, .team-cell-aside, .data-table, .NoMatch, .edit-form {
     background-color: rgba(255, 255, 255, 0.90);
     padding: 20px 30px;
     margin: 20px 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     max-width: 100%;
-    }
-    
+}
 
-    .NoMatch {
+.edit-form {
+    margin-top: 110px;
+}
+
+.NoMatch {
     text-align: center;
     padding: 140px;
-    }
+}
 
+@keyframes colorChange {
+    0% { color: #08E8DE; }
+    50% { color: #FF5A35; }
+    100% { color: #08E8DE; }
+}
+  
+.brand-large {
+    font-size: 2.5rem;
+    font-weight: bold;
+    animation: colorChange 5s infinite;
+}
+  
+
+.brand-small {
+    font-size: 1rem; 
+}
+  
+img {
+    width: auto;
+    height: 100%;
+    object-fit: contain;
+}
+  
+  
+  
 
 @media (max-width: 575.98px) {
     .navbar-collapse .nav-link {
@@ -216,4 +240,13 @@ p,
         margin-top: 40px;
     }
 
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin-bottom: 15px;
+    }
+    .table td, .table th {
+        font-size: 12px;
+        padding: 5px;
+      }
 }

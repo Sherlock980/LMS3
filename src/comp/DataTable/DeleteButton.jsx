@@ -3,26 +3,26 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FaTrash } from 'react-icons/fa';
 
-function DeleteButton({ teamId, teamName, onDelete }) {
+function DeleteButton({ itemId, itemName, onDelete }) {
   const [show, setShow] = useState(false);
 
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
 
   const confirmDelete = () => {
-    onDelete(teamId);
+    onDelete(itemId);
     setShow(false);
   };
 
   return (
     <>
-      <FaTrash onClick={handleShow} />
+      <FaTrash onClick={handleShow} style={{ cursor: 'pointer' }} />
 
-      <Modal show={show} onHide={handleClose} animation={false} id="deleteModal">
+      <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton>
           <Modal.Title>Confirm Delete</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Are you sure you want to delete the team {teamName}?</Modal.Body>
+        <Modal.Body>Are you sure you want to delete {itemName}?</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Cancel
@@ -35,4 +35,6 @@ function DeleteButton({ teamId, teamName, onDelete }) {
     </>
   );
 }
+
 export default DeleteButton;
+

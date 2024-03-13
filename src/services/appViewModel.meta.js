@@ -38,11 +38,24 @@ let appViewModel = {
   entities: {
 
     teams: {
+      editItemPath: id => `/edit-team/${id}`,
+      addNewItemPath: "/add-team",
+      listTitle: "BSL Teams", 
       entity: "teams", //key used for LocalStorage
       entitySingle: "team",
       nameCol: "name",  
-          /* I used this so I could make the delete confirmation generic, 'Are you sure you want to delete (name for teams, full_name for player)*/
-
+      popoverContent: (item) => {
+        const content = [];
+        if (item.logo_path || item.logo_url) {
+          content.push(<img key="logo" src={item.logo_path || item.logo_url} alt={`${item.name} logo`} style={{ width: '100px', height: '100px' }} />);
+        }
+        if (item.motto) {
+          content.push(<p key="motto">{item.motto}</p>);
+        } else {
+          content.push(<p key="member">OFFICIAL MEMBER</p>);
+        }
+        return content;
+      },
       list: {
         options: {
           sortCol: "name",
@@ -81,9 +94,9 @@ let appViewModel = {
           id: 1,
           league_id: 1,
           name: "Sailing Seals",
-          notes: "we need to win",
+          notes: "Lets go!",
           logo_path: SailingSeals,
-          motto: "We are the best!",
+          motto: "ARF ARF",
           coach_id: 1,
           coachName: "Josh Clark",
           coachPhone: "123-456-7890",
@@ -95,8 +108,8 @@ let appViewModel = {
           league_id: 2,
           name: "Polar Pups",
           logo_path: PolarPups,
-          notes: "we need to win",
-          motto: "Our team rocks!",
+          notes: "Keep it up!",
+          motto: "WOOF WOOF",
           coach_id: 2,
           coachName: "Travis Rice",
           coachPhone: "234-567-8901",
@@ -108,8 +121,8 @@ let appViewModel = {
           league_id: 3,
           name: "Flying Penguins",
           logo_path: FlyingPenguins,
-          notes: "we need to win",
-          motto: "We will bury you!",
+          notes: "We've got this!",
+          motto: "SQUAK SQUAK",
           coach_id: 3,
           coachName: "Shaun White",
           coachPhone: "345-678-9012",
@@ -135,6 +148,9 @@ let appViewModel = {
       }
     },
     players: {
+      editItemPath: id => `/edit-team/${id}`,
+      addNewItemPath: "/add-player",
+      listTitle: "Current BSL Players",
       entity: "players",
       entitySingle: "player",
       nameCol: "full_name",
@@ -282,6 +298,8 @@ let appViewModel = {
     },
   },
 
+  
+
   getApi(entity) {
     let model = this.entities[entity];
 
@@ -299,3 +317,5 @@ let appViewModel = {
 };
 
 export default appViewModel;
+
+

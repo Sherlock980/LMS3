@@ -1,6 +1,7 @@
 
 import React from 'react';
 
+
 function SearchBar({ onSearchHandler, filterText, setFilterText }) {
     const handleChange = (e) => {
       const { value } = e.target;
@@ -14,14 +15,14 @@ function SearchBar({ onSearchHandler, filterText, setFilterText }) {
     };
   
     return (
-      <div>
+      <div className='searchbar'>
         <input 
           type="text" 
           value={filterText} 
           onChange={handleChange} 
           placeholder="Search..."
         />
-        <button onClick={handleClear}>Clear</button>
+        <button className='btn' onClick={handleClear}>Clear</button>
       </div>
     );
   }
