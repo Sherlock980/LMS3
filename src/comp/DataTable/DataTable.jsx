@@ -1,5 +1,5 @@
 import React from 'react';
-import TableHeaderRow from './TableHeaderRow'; // Make sure this path is correct
+import TableHeaderRow from './TableHeaderRow';
 import DataRow from './DataRow';
 import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";

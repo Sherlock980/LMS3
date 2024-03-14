@@ -57,29 +57,31 @@ export default class LocalStorageService {
 
     async create(obj) {
         if (!this.model.data) {
-            console.error('Model data array is undefined, initializing as empty array.');
             this.model.data = [];
+            
         }
         const newId = this.model.data.reduce((acc, cur) => cur.id > acc ? cur.id : acc, 0) + 1;
         const newObj = { ...obj, id: newId };
+
         this.model.data.push(newObj);
         this.store();
+
     }
-
-
 
     async read(getId) {
         const item = this.model.data.find(item => String(item.id) === String(getId));
         return item || null;
+        
     }
     
-   async update(obj) {
-       let index = this.getItemIndex(obj.id);
-       if (index !== -1) {
-           this.model.data[index] = obj;
-           this.store();
-       }
-   }
+    async update(obj) {
+        let index = this.getItemIndex(obj.id);
+        if (index !== -1) {
+          this.model.data[index] = obj;
+          this.store();
+        }
+      }
+      
 
    async delete(removeId) {
        let index = this.getItemIndex(removeId);
@@ -133,9 +135,10 @@ export default class LocalStorageService {
       });
   }
   
-   getItemIndex(id) {
-       return this.model.data.findIndex(item => item.id === id);
-   }
+  getItemIndex(id) {
+    const index = this.model.data.findIndex(item => item.id === id);
+    return index;
+}
 
    cloneObject(obj) {
        return JSON.parse(JSON.stringify(obj));

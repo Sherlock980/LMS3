@@ -39,8 +39,8 @@ function EditTeam({ isCreate }) {
 
     const onSubmit = async (data) => {
       const isNewTeam = isCreate;
-      const currentTeamId = isNewTeam ? null : id;
-    
+      const currentTeamId = isNewTeam ? null : Number(id);
+      
       const unique = await isTeamNameUnique(data.name, currentTeamId);
       if (!unique) {
         setError("name", {
@@ -51,21 +51,22 @@ function EditTeam({ isCreate }) {
       } else {
         clearErrors("name");
       }
-
-      const coachName = coachOptions.find(option => String(option.value) === String(data.coach_id))?.label;
-      const submissionData = { ...data, coachName };
     
+      const coachName = coachOptions.find(option => String(option.value) === String(data.coach_id))?.label;
+      const submissionData = { ...data, id: currentTeamId, coachName };
+      
       try {
         if (isNewTeam) {
           await api.create(submissionData);
         } else {
-          await api.update(currentTeamId, submissionData);
+          await api.update(submissionData);
         }
         navigate("/teams");
       } catch (error) {
         console.error("Failed to save team", error);
       }
     };
+    
     
     return (
       <Container>
