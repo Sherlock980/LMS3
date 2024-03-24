@@ -1,10 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
 import DataTable from '../DataTable/DataTable';
 import AlertList from '../Layout/AlertList';
-import { TeamsContext } from '../../services/TeamsContext';
+import { Link } from 'react-router-dom';
+import { TeamsContext, PlayersContext }  from '../../services/contexts';
 
-function ListView() {
-  const { api, viewModel } = useContext(TeamsContext);
+function ListView({ entityType }) {
+  const context = entityType === 'teams' ? TeamsContext : PlayersContext;
+  const { api, viewModel } = useContext(context);
   const [data, setData] = useState([]);
   const [sortCol, setSortCol] = useState(viewModel.list.options.sortCol);
   const [sortDir, setSortDir] = useState(viewModel.list.options.sortDir);
@@ -12,7 +14,9 @@ function ListView() {
   const [filterText, setFilterText] = useState('');
   const [alertList, setAlertList] = useState([]);
   const [isReset, setIsReset] = useState(false);
-
+  const editPath = entityType === 'teams' ? '/edit-team' : '/edit-player';
+  const addPath = entityType === 'teams' ? '/add-team' : '/add-player';
+  let addNewItemPath = viewModel.addNewItemPath;
   const addAlert = (title, type = 'info') => {
     setAlertList(current => [...current, { id: Date.now(), title, type }]);
   };
@@ -66,11 +70,13 @@ function ListView() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        console.log("DataTable: Fetching Data");
         api.sortCol = sortCol;
         api.sortDir = sortDir;
 
         const allData = await api.list();
         let filteredData = allData;
+        console.log("DataTable: Data Fetched", filteredData);
     
         if (filterStr.trim()) {
           const searchTermLower = filterStr.toLowerCase();
@@ -85,6 +91,7 @@ function ListView() {
     
         setData(filteredData);
       } catch (error) {
+          console.log("DataTable: Error Fetching Data", error);
       }
     };
     
@@ -95,6 +102,7 @@ function ListView() {
     data && (
       <div>
         <AlertList alerts={alertList} onDismiss={dismissAlert} />
+        
         <DataTable
           data={data}
           sortCol={sortCol}
@@ -107,6 +115,7 @@ function ListView() {
           filterText={filterText}
           onSearchHandler={onSearchHandler}
           setFilterText={setFilterText}
+          addNewItemPath={addNewItemPath}
         />
       </div>
     )

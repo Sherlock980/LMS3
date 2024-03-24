@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
-import { TeamsContext } from '../../services/TeamsContext';
+import { TeamsContext } from '../../services/contexts';
 import { Container, Form, Button } from 'react-bootstrap';
 import { Controller } from 'react-hook-form';
 
 function EditTeam({ isCreate }) {
-  const { api} = useContext(TeamsContext);
+  const { api } = useContext(TeamsContext);
     const navigate = useNavigate();
     const { id } = useParams();
     const { register, handleSubmit, control, setValue, formState: { errors }, setError, clearErrors }  = useForm();

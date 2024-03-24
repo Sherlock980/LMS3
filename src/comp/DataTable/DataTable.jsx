@@ -5,7 +5,8 @@ import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
 import SearchBar from '../SearchBar/SearchBar';
 
-function DataTable({ data, onHandleDelete, sortCol, sortDir, onHandleSort, handleReset, columns, viewModel, filterText, onSearchHandler, setFilterText }) {
+function DataTable({ data, onHandleDelete, sortCol, sortDir, onHandleSort, handleReset, columns, viewModel, filterText, onSearchHandler, setFilterText, addNewItemPath }) {
+
   return (
     <div className="data-table mb-4">
       <h1>{viewModel.list.listTitle}</h1> 
@@ -20,7 +21,11 @@ function DataTable({ data, onHandleDelete, sortCol, sortDir, onHandleSort, handl
           />
         </thead>
         <tbody>
-          {data.map((item, index) => (
+        
+
+        {data.map((item, index) => {
+          console.log("DataRow Item:", item);
+          return (
             <DataRow
               key={item.id || `temp-key-${index}`}
               item={item}
@@ -28,13 +33,14 @@ function DataTable({ data, onHandleDelete, sortCol, sortDir, onHandleSort, handl
               onHandleDelete={onHandleDelete}
               viewModel={viewModel}
             />
-          ))}
+          );
+        })}
         </tbody>
       </table>
       <div className='btn-cont'>
         <Button variant="primary" onClick={handleReset} className="btn">Clear</Button>
-        <Link to={viewModel.addNewItemPath}>
-          <Button className="btn m-2" variant="primary">New </Button>
+        <Link to={addNewItemPath}>
+          <Button className="btn btn-primary m-2">New {viewModel.entitySingle}</Button>
         </Link>
       </div>
     </div>

@@ -1,10 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
 import DataTable from '../DataTable/DataTable';
 import AlertList from '../Layout/AlertList';
-import { TeamsContext } from '../../services/TeamsContext';
+import { Link } from 'react-router-dom'; // Import Link
+import { TeamsContext, PlayersContext } from '../../services/contexts';
 
-function ListView() {
-  const { api, viewModel } = useContext(TeamsContext);
+function ListView({ entityType }) {
+  const context = entityType === 'teams' ? TeamsContext : PlayersContext;
+  const { api, viewModel } = useContext(context);
   const [data, setData] = useState([]);
   const [sortCol, setSortCol] = useState(viewModel.list.options.sortCol);
   const [sortDir, setSortDir] = useState(viewModel.list.options.sortDir);
@@ -12,6 +14,8 @@ function ListView() {
   const [filterText, setFilterText] = useState('');
   const [alertList, setAlertList] = useState([]);
   const [isReset, setIsReset] = useState(false);
+  const editPath = entityType === 'teams' ? '/edit-team' : '/edit-player';
+  const addPath = entityType === 'teams' ? '/add-team' : '/add-player';
 
   const addAlert = (title, type = 'info') => {
     setAlertList(current => [...current, { id: Date.now(), title, type }]);
@@ -96,7 +100,9 @@ function ListView() {
     data && (
       <div>
         <AlertList alerts={alertList} onDismiss={dismissAlert} />
-
+        <Link to={addPath}>
+          <button className="btn btn-primary m-2">New {viewModel.entitySingle}</button>
+        </Link>
         <DataTable
           data={data}
           sortCol={sortCol}
@@ -109,6 +115,7 @@ function ListView() {
           filterText={filterText}
           onSearchHandler={onSearchHandler}
           setFilterText={setFilterText}
+          editPath={editPath}
         />
       </div>
     )

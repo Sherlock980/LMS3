@@ -45,6 +45,7 @@ let appViewModel = {
       entitySingle: "team",
       nameCol: "name",  
       popoverContent: (item) => {
+        console.log(`Generating popover content for item:`, item);
         const content = [];
         if (item.logo_path || item.logo_url) {
           content.push(<img key="logo" src={item.logo_path || item.logo_url} alt={`${item.name} logo`} style={{ width: '100px', height: '100px' }} />);
@@ -148,7 +149,7 @@ let appViewModel = {
       }
     },
     players: {
-      editItemPath: id => `/edit-team/${id}`,
+      editItemPath: id => `/edit-player/${id}`,
       addNewItemPath: "/add-player",
       listTitle: "Current BSL Players",
       entity: "players",
@@ -164,7 +165,7 @@ let appViewModel = {
           offset: 0,
         },
 
-        listTitle: "Current BSL Teams",
+        listTitle: "Current BSL Players",
         tableClasses: "table table-dark table-hover mt-2", //classes for table tag
         thClasses: "bg-black bg-gradient", //classes for my th tags (you may not need)
 
@@ -202,17 +203,17 @@ let appViewModel = {
           notes: "My notes",
           city: "Orem",
           state: "UT",
-          zip: "1",
+          zip: "12345",
           team_id: 1,
           email: "gjenson@gmail.com",
           phone: "801-333-4444",
           password: "mypassword",
-          user_name: "gjenson",
+          user_name: "User1!",
           license_level_id: 1,
           person_type: "player",
           full_name: "Gabe Jenson",
           full_address: "1527 N. 230 w. Apt. 3, Orem UT 84664",
-          team_name: "Raptors",
+          team_name: "Polar Pups",
         },
         {
           id: 4,
@@ -223,17 +224,17 @@ let appViewModel = {
           notes: "My notes",
           city: "Orem",
           state: "UT",
-          zip: "1",
+          zip: "54321",
           team_id: 2,
           email: "h.jenson@gmail.com",
           phone: "801-333-4444",
           password: "mypassword",
-          user_name: "hjenson",
+          user_name: "User2!",
           license_level_id: 1,
           person_type: "player",
           full_name: "Hannah Jenson",
           full_address: "1527 N. 230 w. Apt. 3, Orem UT 84664",
-          team_name: "Killer Bunnies",
+          team_name: "Polar Pups",
         },
         {
           id: 9,
@@ -249,12 +250,12 @@ let appViewModel = {
           email: "rachel_conroy92@gmail.com",
           phone: "669-664-2379",
           password: "password",
-          user_name: "kjenson",
+          user_name: "User3!",
           license_level_id: 1,
           person_type: "player",
           full_name: "Alvis Bechtelar",
           full_address: "661 Ritchie Village Bogisichville UT 84556",
-          team_name: "ThuderBirds",
+          team_name: "Sailing Seals",
         },
         {
           id: 10,
@@ -270,12 +271,12 @@ let appViewModel = {
           email: "bradford_rutherford6@hotmail.com",
           phone: "558-580-8071",
           password: "password",
-          user_name: "kjenson",
+          user_name: "User4!",
           license_level_id: 1,
           person_type: "player",
           full_name: "Tate Anderson",
           full_address: "358 Hirthe Glens, Lake Maximilianfurt UT 84556",
-          team_name: "Killer Bunnies",
+          team_name: "Flying Penguins"
         },
       ],
 

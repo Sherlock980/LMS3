@@ -2,7 +2,7 @@ import React from 'react';
 
 function TeamsAside() {
   return (
-    <aside className="col-md-3 team-cell-aside order-md-1">
+    <aside className="col-md-3 cell-aside order-md-1">
         <h3>Team Dynamics and Point System</h3>
         <p>
             A team can consist of amateur and professional riders. 

@@ -75,12 +75,17 @@ export default class LocalStorageService {
     }
     
     async update(obj) {
-        let index = this.getItemIndex(obj.id);
+        const index = this.getItemIndex(obj.id);
         if (index !== -1) {
-          this.model.data[index] = obj;
-          this.store();
+            this.model.data[index] = { ...this.model.data[index], ...obj };
+            this.store();
+            return Promise.resolve(this.model.data[index]); // Return the updated object for confirmation
+        } else {
+            return Promise.reject(new Error(`Item with id ${obj.id} not found`));
         }
-      }
+    }
+    
+    
       
 
    async delete(removeId) {
@@ -136,9 +141,9 @@ export default class LocalStorageService {
   }
   
   getItemIndex(id) {
-    const index = this.model.data.findIndex(item => item.id === id);
-    return index;
+    return this.model.data.findIndex(item => item.id.toString() === id.toString());
 }
+
 
    cloneObject(obj) {
        return JSON.parse(JSON.stringify(obj));

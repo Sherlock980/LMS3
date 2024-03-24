@@ -7,11 +7,18 @@ import { Link } from "react-router-dom";
 import { Button } from 'react-bootstrap';
 
 function DataRow({ item, columns, onHandleDelete, viewModel }) {
+  console.log("DataRow: Received Item", item);
+
   if (!item) {
     return null;
   }
+  const editPath = `/edit-${viewModel.entitySingle}/${item.id}`;
+  console.log('ViewModel in DataRow:', viewModel);
+console.log('Popover content function:', viewModel.popoverContent);
 
-  const popoverContent = viewModel.popoverContent(item);
+// Assuming viewModel and item are correctly passed and defined
+
+  const popoverContent = viewModel.popoverContent ? viewModel.popoverContent(item) : 'Default content';
 
   const popover = (
     <Popover id={`popover-${item.id}`}>
@@ -21,6 +28,7 @@ function DataRow({ item, columns, onHandleDelete, viewModel }) {
       </Popover.Body>
     </Popover>
   );
+  
 
   return (
     <tr>
@@ -42,8 +50,10 @@ function DataRow({ item, columns, onHandleDelete, viewModel }) {
       })}
       <td>
         <DeleteButton itemId={item.id} itemName={item[viewModel.nameCol]} onDelete={() => onHandleDelete(item.id)} />
-        <Link to={viewModel.editItemPath(item.id)}>
-          <Button className="m-2" variant="primary"><FaEdit /></Button>
+        <Link to={editPath}>
+          <Button className="m-2" variant="primary">
+            <FaEdit />
+          </Button>
         </Link>
       </td>
     </tr>

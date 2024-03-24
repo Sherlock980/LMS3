@@ -32,6 +32,12 @@ function Header() {
                   <Nav.Link className="nav-button">Teams</Nav.Link>
                 </LinkContainer>
               </Nav.Item>
+              <Nav.Item>
+                  <LinkContainer to="/players">
+                      <Nav.Link className="nav-button">Players</Nav.Link>
+
+                  </LinkContainer>
+              </Nav.Item>
             </Nav>
           </Navbar.Collapse>
         </Container>

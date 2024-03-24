@@ -1,7 +1,7 @@
 import TeamsAside from './TeamsAside';
 import ListView from '../../comp/ListView/ListView';
 import React, { useContext } from 'react';
-import { TeamsContext } from '../../services/TeamsContext';
+import { TeamsContext } from '../../services/contexts';
 
 function TeamsPage() {
   const { api, viewModel } = useContext(TeamsContext);
@@ -11,7 +11,7 @@ function TeamsPage() {
       <div className="row">
         <TeamsAside />
         <div className="col-md-9 order-md-2">
-          <ListView viewModel={viewModel} api={api} />
+        <ListView entityType="teams" />
         </div>
       </div>
     </div>
